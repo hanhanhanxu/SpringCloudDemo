@@ -1,0 +1,38 @@
+server:
+  port: 10082
+spring:
+  application:
+    name: gateway-server
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: web-server
+          uri: lb://web-server
+          predicates:
+            - Path=/web/**
+          filters:
+            - RewritePath=/web/(?<segment>.*), /$\{segment}
+        - id: customer-server
+          uri: lb://customer-server
+          predicates:
+            - Path=/customer/**
+          filters:
+            - RewritePath=/customer/(?<segment>.*), /$\{segment}
+        - id: producer-server
+          uri: lb://producer-server
+          predicates:
+            - Path=/producer/**
+          filters:
+            - RewritePath=/producer/(?<segment>.*), /$\{segment}
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://localhost:10081/eureka/

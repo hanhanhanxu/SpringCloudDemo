@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: customer-server
+server:
+  port: 10084
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://localhost:10081/eureka/
+ribbon:
+  ReadTimeout: 15000
+  ConnectTimeout: 15000
