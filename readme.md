@@ -18,4 +18,8 @@ http://localhost:10082/producer/hello-c
 
 api写在(SpringCloudApi)里，然后服务提供者继承接口实现方法，服务消费者只需要引用(SpringCloudApi)的即可使用接口
 
+消费者其实是生产者，所以要先启动（名字是随便起的）
+
+如果消费者启动不了，报：The output path is not specified for module SpringCloudApi，则需要再SpringCloudDemo下手动创建一个output然后Project Structure设置一下
+
 还缺少一个SpringCloud config，但他不能动态更新配置，所以通常使用SpringCloud Bus来做动态配置加载

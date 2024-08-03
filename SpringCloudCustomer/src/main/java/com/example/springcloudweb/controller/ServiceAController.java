@@ -4,6 +4,7 @@ import com.example.springcloudweb.domain.Student;
 import com.example.springcloudweb.domain.User;
 import com.example.springcloudweb.feign.CustomerClient;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,12 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ServiceAController implements CustomerClient {
 
+    @Value("${name}")
+    private String name;
+    /*@Value("${key}")
+    private String key;*/
+
     @Override
     @GetMapping("/hello")
     public String getHello() throws InterruptedException {
         log.info("sayHello...");
         Thread.sleep(10);
-        return "Hello from Service Customer!";
+        return "Hello from Service Customer! name: " + name;
+//        return "Hello from Service Customer! name: " + name + ", key: " + key;
     }
 
     @Override

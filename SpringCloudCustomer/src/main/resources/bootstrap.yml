@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    config:
+      # customer-dev.yml
+      # 与远程仓库中的配置文件的application保持一致  -的前面
+      name: customer
+      # 与远程仓库中的配置文件的profile保持一致   -的后面
+      profile: dev
+      # 与远程仓库中的版本保持一致
+      label: master
+      uri: http://localhost:12000
+#      discovery:
+        # 启用配置中心
+#        enabled: true
+        # 配置中心服务id  一般是config服务的spring.application.name
+#        service-id: config-server
+# 告诉当前服务注册中心的地址，然后当前服务会从注册中心获取config服务的地址，然后通过上述配置去config服务获取到正确的配置文件，并加载配置
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:10081/eureka/
